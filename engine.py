@@ -4,9 +4,13 @@ import cv2
 
 class Graph:
 
-    def __init__(self, points, connections):
+    def __init__(self, points, connections, centerPoint = 0):
+        self.centerPoint = centerPoint
         self.points = points
         self.connections = connections
+
+    def getCurrentPos(self):
+        return self.points[self.centerPoint]
 
     def scale(self, factor):
         for (i, point) in enumerate(self.points):
@@ -14,11 +18,14 @@ class Graph:
 
     def translate(self, translation):
         for (i, point) in enumerate(self.points):
-            self.points[i] = point + translation
+            self.points[i] = np.add(point, translation)
 
     def rotate(self, rotationMatrix):
+        currentPos = self.getCurrentPos()
+        self.translate(-currentPos)
         for (i, point) in enumerate(self.points):
             self.points[i] = np.dot(rotationMatrix, point)
+        self.translate(currentPos)
 
     def rotateRoundX(self, degrees):
         rotationMatrix = np.asarray([

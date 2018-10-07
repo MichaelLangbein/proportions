@@ -19,6 +19,7 @@ while True:
         face.align(faceLandmarks)
         e.draw(face, frame)
 
+
     key = cv2.waitKey(20)
     if key == 27: # exit on ESC
         break
