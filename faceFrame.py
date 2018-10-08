@@ -1,4 +1,5 @@
 import engine as e
+import numpy as np
 
 class FaceFrame(e.Graph):
 
@@ -12,10 +13,15 @@ class FaceFrame(e.Graph):
             [16, 3, 0],  # rechtes auge r
             [8,  9, 0],  # nasenspitze l 
             [12, 9, 0],  # nasenspitze r
-            [6, 12, 0],  # mund l
-            [14, 12, 0], # mund r
-            [9,  18, 0], # kinn l
-            [11, 18, 0]  # kinn r
+            [6, 13, 0],  # mund l
+            [14, 13, 0], # mund r
+            [9,  20, 0], # kinn l
+            [11, 20, 0],  # kinn r
+            [9, -12, 0],  # kopf l
+            [11, -12, 0],  # kopf r
+            [9, -10, 0],  # haar l
+            [11, -10, 0],  # haar r
+            [10, 0, 0] #midpoint
         ]
         connections = [
             [0, 1], # stirn
@@ -23,7 +29,9 @@ class FaceFrame(e.Graph):
             [4, 5], # rechtes auge
             [6, 7], # nase
             [8, 9], # mund
-            [10, 11] # kinn
+            [10, 11], # kinn
+            [12, 13], # kopf
+            [14, 15] # haar
         ]
         e.Graph.__init__(self, points, connections)
 
@@ -37,12 +45,11 @@ class FaceFrame(e.Graph):
         ownWidth = self.points[1][0] - self.points[0][0]
         self.scale(float(width) / float(ownWidth))
         # step 3: rotation
-        # 3.1: rotation around y axis
-        widthLeftEye = coordinates[39][0] - coordinates[36][0]
-        widthRigthEye = coordinates[45][0] - coordinates[42][0]
-        #self.rotateRoundY(10.0*(1.0 - float(widthLeftEye) / float(widthRigthEye)))
-        # 3.2 rotation around x axis
-        heightLeftEye = coordinates[39][1]
-        heightRightEye = coordinates[42][1]
-        #self.rotateRoundY(10.0*(1.0 - float(heightLeftEye) / float(heightRightEye)))
+        # 3.1: rotation around z axis
+        #xCornerRigthEye = coordinates[45][0]
+        #xCornerRightEyeSupposed = self.points[5][0]
+        #rate = float(xCornerRigthEye) / float(xCornerRightEyeSupposed)
+        #self.rotateRoundZ(angle)
+        
+
         

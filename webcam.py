@@ -9,7 +9,6 @@ video_capture = cv2.VideoCapture(0)
 ld = LandmarkDetector()
 face = ff.FaceFrame()
 
-
 while True:
     ret, frame = video_capture.read()
     frame = imutils.resize(frame, width=500)

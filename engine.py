@@ -22,7 +22,7 @@ class Graph:
 
     def rotate(self, rotationMatrix):
         currentPos = self.getCurrentPos()
-        self.translate(-currentPos)
+        self.translate(map(lambda v: -v, currentPos))
         for (i, point) in enumerate(self.points):
             self.points[i] = np.dot(rotationMatrix, point)
         self.translate(currentPos)
