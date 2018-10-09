@@ -45,11 +45,17 @@ class FaceFrame(e.Graph):
         ownWidth = self.points[1][0] - self.points[0][0]
         self.scale(float(width) / float(ownWidth))
         # step 3: rotation
-        # 3.1: rotation around z axis
-        #xCornerRigthEye = coordinates[45][0]
-        #xCornerRightEyeSupposed = self.points[5][0]
-        #rate = float(xCornerRigthEye) / float(xCornerRightEyeSupposed)
-        #self.rotateRoundZ(angle)
-        
+    # 3.1: rotation around z axis
+        xCornerRightEyeSupposed = self.points[5][0]
+        xCornerRigthEye = coordinates[45][0]
+        rate = float(xCornerRigthEye) / float(xCornerRightEyeSupposed)
+        if rate < 1 and -1 < rate:
+            above = (self.points[1][1] > self.points[0][1])
+            if above: 
+                angle = np.arccos(rate)
+                self.rotateRoundZ(angle)
+            else:
+                angle = np.arccos(-rate)
+                self.rotateRoundZ(angle)
 
         
